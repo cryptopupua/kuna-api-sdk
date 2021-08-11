@@ -5,7 +5,10 @@ const keys = {
 
   const kuna = require('./v3')(keys); 
 
-  kuna.public.checkKunaCode('5jKoj')
+/*   kuna.public.checkKunaCode('5jKoj')
+  .then((data) => console.log(data))
+  .catch(err => console.log('Error: ', err)); */
+  
+  kuna.private.accountInfo()
   .then((data) => console.log(data))
   .catch(err => console.log('Error: ', err));
-

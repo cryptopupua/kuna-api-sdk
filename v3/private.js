@@ -185,12 +185,14 @@ KunaPrivate.prototype.getSignature = function(url_api, nonce, body) {
   const apiPath = `/v3/${url_api}`;
   const signatureString = `${apiPath}${nonce}${JSON.stringify(body)}`;
 
-  // console.log(signatureString)
+  console.log(signatureString)
 
   const signature = crypto
     .createHmac('sha384', this.secretKey)
     .update(signatureString)
     .digest('hex');
+
+  console.log(signature)
 
   return signature
 }
