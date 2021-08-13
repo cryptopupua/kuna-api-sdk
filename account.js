@@ -9,3 +9,7 @@ const keys = {
   kuna.private.accountInfo()
   .then((data) => console.log(data))
   .catch(err => console.log('Error: ', err));
+
+  kuna.private.accountBalance()
+  .then((data) => console.log(data))
+  .catch(err => console.log('Error: ', err));

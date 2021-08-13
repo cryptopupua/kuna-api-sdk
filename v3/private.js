@@ -50,6 +50,17 @@ KunaPrivate.prototype.createOrder = function (order) {
   return this.authedRequest(url, method, order)
 }
 
+/** Activate kuna code if possible
+ * @param {*} kunaCode 
+ * @returns 
+ */
+KunaPrivate.prototype.activateCode = function (kunaCode) {
+  const url = 'auth/kuna_codes/redeem' 
+  const method = 'post'
+  const body = { code: kunaCode }
+  return this.authedRequest(url, method, body)
+}
+
 /**
  * Список активных ордеров
  * @param {String} market 
