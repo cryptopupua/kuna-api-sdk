@@ -56,7 +56,7 @@ KunaPrivate.prototype.createOrder = function (order) {
  */
 KunaPrivate.prototype.activateCode = function (kunaCode) {
   const url = 'auth/kuna_codes/redeem' 
-  const method = 'post'
+  const method = 'put'
   const body = { code: kunaCode }
   return this.authedRequest(url, method, body)
 }
