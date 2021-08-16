@@ -15,6 +15,7 @@ function checkCode(inkunacode) {
 
 const prompt = require('prompt-sync')();
 
+
 if (process.argv.length < 3)
 {
   const kunacode = prompt('Get me kuba code:');

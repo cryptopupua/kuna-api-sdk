@@ -65,10 +65,46 @@ KunaPublic.prototype.getFees = function() {
 }
 
 /**
+ * Validate kuna code
+ * @param {*} code 
+ * @returns 
+ */
+KunaPublic.prototype.validateKunaCode = function(kunaCode) {
+  const base58Alphabet = '123456789abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ';
+
+  if(!kunaCode || kunaCode.length < 1) {
+      throw new Error('Missing Kuna Code');
+  }
+
+  const segments = kunaCode.split('-');
+  const sufix = segments.slice(-2);
+  const body = segments.slice(0, -2);
+  if (sufix[1] !== 'KCode' || body.length !== 9) {
+      throw new Error('Invalid format');
+  }
+
+  // Check KunaCode checksum
+  const checksum = base58Alphabet.indexOf(body[0][0]);
+
+  const str = body.join('').slice(1);
+  let i = str.length;
+  let sum = 0;
+  while (i--) {
+      sum += base58Alphabet.indexOf(str.charAt(i));
+  }
+
+  if (sum % 58 !== checksum) {
+      throw new Error('Invalid checksum');
+  }
+}
+
+
+/**
  * Check kuna-code
  * @code {*} First 5 symbols from kuna code 
  */
 KunaPublic.prototype.checkKunaCode = function(code) {
+  this.validateKunaCode(code)
   return this.request('kuna_codes/'+code+'/check')
 }
 
@@ -86,16 +122,16 @@ KunaPublic.prototype.request = function(url_api, method, postData) {
 
   return axios[method](url, {})
     .then(({data}) => data )
-    // .catch((error) => {
-    //   if (error.response != undefined) {
-    //     console.log('ERROR')
-    //     console.log(error.message)
+     .catch((error) => {
+       if (error.response != undefined) {
+         console.log('ERROR')
+         console.log(error.message)
 
-    //   } else {
-    //     console.log('ERROR 2')
-    //     console.log(error)
-    //   }
-    // })
+       } else {
+         console.log('ERROR 2')
+         console.log(error)
+       }
+     })
 }
 
 
