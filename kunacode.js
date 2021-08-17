@@ -1,24 +1,32 @@
 function checkCode(inkunacode) {
+  try {
+    kuna.public.validateKunaCode(inkunacode)
+    var kunacodepattern1=inkunacode.slice(0, 5);
+    kuna.public.checkKunaCode(kunacodepattern1).then((data) =>  step2(data, inkunacode))   
+  } catch (error) {
+    return error.message;
+  } 
+}
 
-  const keys = {
+function step2(data,inkunacode) {
+  console.log(data);
+  const isactivate = prompt('Activate code? (y/n)');
+  if (isactivate === 'y') {
+    try {
+      kuna.private.activateCode(inkunacode).then((data)=> console.log(data));
+    } catch (error) {
+        return error.message;
+    }
+  } 
+}
+
+
+const keys = {
     publicKey: 'u8vHSYIZy9Dst0qu3J1xrttxoHibCS5miLXrXOoS',
     secretKey: 'b0nsAEq6urPpkpGxzwl7dwvJR4dhwf2VpP4mTIyi',
   };
 
-  const kuna = require('./v3')(keys); 
-
-  try {
-    kuna.public.validateKunaCode(inkunacode)
-    var kunacodepattern1=inkunacode.slice(0, 5);
-    return 'Kuna code - valid!';
-  } catch (error) {
-    return error.message;
-  } 
-
-/*   return  kuna.public.checkKunaCode(kunacodepattern1)
-  .then((data) => data)
-  .catch((err) => err);    */
-}
+const kuna = require('./v3')(keys); 
 
 const prompt = require('prompt-sync')();
 
@@ -33,7 +41,8 @@ if (process.argv.length < 3)
 
  
 
-  
-/*   kuna.private.activateCode('wfD2V-GCnnw-R9V9L-TyphL-JPd3q-zRUpi-Rtd1N-H4SMr-cXjMx-UAH-KCode')
+/*   
+   kuna.private.activateCode('8NhTJ-HfZWs-ii4eY-2VUWD-ZT3To-qEvmF-BUH1R-189mG-4agLi-UAH-KCode')
   .then((data) => console.log(data))
-  .catch(err => console.log('Error: ', err));  */
+  .catch(err => console.log('Error: ', err));  
+ */
