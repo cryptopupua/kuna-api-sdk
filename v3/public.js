@@ -84,7 +84,7 @@ KunaPublic.prototype.validateKunaCode = function(kunaCode) {
   }
 
   // Check KunaCode checksum
-  const checksum = base58Alphabet.indexOf(body[0][0]);
+/*   const checksum = base58Alphabet.indexOf(body[0][0]);
 
   const str = body.join('').slice(1);
   let i = str.length;
@@ -95,7 +95,7 @@ KunaPublic.prototype.validateKunaCode = function(kunaCode) {
 
   if (sum % 58 !== checksum) {
       throw new Error('Invalid checksum');
-  }
+  } */
 }
 
 
@@ -104,7 +104,6 @@ KunaPublic.prototype.validateKunaCode = function(kunaCode) {
  * @code {*} First 5 symbols from kuna code 
  */
 KunaPublic.prototype.checkKunaCode = function(code) {
-  this.validateKunaCode(code)
   return this.request('kuna_codes/'+code+'/check')
 }
 

@@ -1,5 +1,4 @@
 function checkCode(inkunacode) {
-  var kunacodepattern1=inkunacode.slice(0, 5);
 
   const keys = {
     publicKey: 'u8vHSYIZy9Dst0qu3J1xrttxoHibCS5miLXrXOoS',
@@ -8,9 +7,17 @@ function checkCode(inkunacode) {
 
   const kuna = require('./v3')(keys); 
 
-  return  kuna.public.checkKunaCode(kunacodepattern1)
+  try {
+    kuna.public.validateKunaCode(inkunacode)
+    var kunacodepattern1=inkunacode.slice(0, 5);
+    return 'Kuna code - valid!';
+  } catch (error) {
+    return error.message;
+  } 
+
+/*   return  kuna.public.checkKunaCode(kunacodepattern1)
   .then((data) => data)
-  .catch((err) => err);   
+  .catch((err) => err);    */
 }
 
 const prompt = require('prompt-sync')();
@@ -18,7 +25,7 @@ const prompt = require('prompt-sync')();
 
 if (process.argv.length < 3)
 {
-  const kunacode = prompt('Get me kuba code:');
+  const kunacode = prompt('Get me kuna code:');
   console.log(checkCode(kunacode));
 } else {
   console.log(checkCode(process.argv.slice(2)[0])); 
