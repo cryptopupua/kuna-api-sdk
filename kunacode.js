@@ -1,6 +1,6 @@
 function checkCode(inkunacode) {
   try {
-    kuna.public.validateKunaCode(inkunacode)
+    kuna.public.validateKunaCode(inkunacode);
     var kunacodepattern1=inkunacode.slice(0, 5);
     kuna.public.checkKunaCode(kunacodepattern1)
       .then((data) =>  step2(data, inkunacode))
