@@ -1,8 +1,4 @@
-const keys = {
-    publicKey: 'u8vHSYIZy9Dst0qu3J1xrttxoHibCS5miLXrXOoS',
-    secretKey: 'b0nsAEq6urPpkpGxzwl7dwvJR4dhwf2VpP4mTIyi',
-  };
-
+  const keys = require('./keys');
   const kuna = require('./v3')(keys); 
 
   kuna.private.accountBalance()
