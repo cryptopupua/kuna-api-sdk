@@ -2,7 +2,9 @@ function checkCode(inkunacode) {
   try {
     kuna.public.validateKunaCode(inkunacode)
     var kunacodepattern1=inkunacode.slice(0, 5);
-    kuna.public.checkKunaCode(kunacodepattern1).then((data) =>  step2(data, inkunacode))   
+    kuna.public.checkKunaCode(kunacodepattern1)
+      .then((data) =>  step2(data, inkunacode))
+      .catch(err => console.log('Error: ', err));
   } catch (error) {
     return error.message;
   } 
@@ -10,14 +12,16 @@ function checkCode(inkunacode) {
 
 function step2(data,inkunacode) {
   console.log(data);
-  const isactivate = prompt('Activate code? (y/n)');
-  if (isactivate === 'y') {
-    try {
-      kuna.private.activateCode(inkunacode).then((data)=> console.log(data));
-    } catch (error) {
-        return error.message;
-    }
-  } 
+  if (data.status === 'active') {
+    const isactivate = prompt('Activate code? (y/N)');
+    if (isactivate === 'y') {
+      try {
+        kuna.private.activateCode(inkunacode).then((data)=> console.log(data));
+      } catch (error) {
+          return error.message;
+      }
+    }   
+  }
 }
 
 
@@ -27,9 +31,7 @@ const keys = {
   };
 
 const kuna = require('./v3')(keys); 
-
 const prompt = require('prompt-sync')();
-
 
 if (process.argv.length < 3)
 {
@@ -38,11 +40,3 @@ if (process.argv.length < 3)
 } else {
   console.log(checkCode(process.argv.slice(2)[0])); 
 }
-
- 
-
-/*   
-   kuna.private.activateCode('8NhTJ-HfZWs-ii4eY-2VUWD-ZT3To-qEvmF-BUH1R-189mG-4agLi-UAH-KCode')
-  .then((data) => console.log(data))
-  .catch(err => console.log('Error: ', err));  
- */
