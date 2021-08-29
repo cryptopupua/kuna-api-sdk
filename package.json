@@ -49,6 +49,7 @@
     "account": "node account.js",
     "kunacode": "node kunacode.js",
     "balance": "node balance.js",
+    "create": "node createkunacode.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "version": "2.1.6",
