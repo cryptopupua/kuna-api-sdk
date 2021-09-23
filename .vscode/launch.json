@@ -1,6 +1,15 @@
 {
     "version": "0.2.0",
     "configurations": [
+        {
+            "name": "Launch Balance",
+            "program": "${workspaceFolder}/balance.js",
+            "request": "launch",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "type": "pwa-node"
+        },
         
         {
             "name": "Launch Kuna Code",

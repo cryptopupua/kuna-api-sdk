@@ -201,9 +201,10 @@ KunaPrivate.prototype.getSignature = function(url_api, nonce, body) {
     .update(signatureString)
     .digest('hex');
 
-  console.log('Signature sting:'+signatureString);
-  console.log('Signature:'+signature);
 
+/*     console.log('Signature sting:' + signatureString);
+    console.log('Signature:' + signature); */
+  
   return signature
 }
 

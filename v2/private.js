@@ -146,8 +146,8 @@ KunaPrivate.prototype.getSignature = function(method, url, queryParams) {
     )
   )
 
-  console.log('Signature sting:'+signatureString);
-  console.log('Signature:'+signature);
+/*   console.log('Signature sting:'+signatureString);
+  console.log('Signature:'+signature); */
 
   return signature
 }
