@@ -48,6 +48,7 @@
   "main": "index.js",
   "name": "kuna-api-sdk",
   "scripts": {
+    "server": "node server.js",
     "account": "node account.js",
     "kunacode": "node kunacode.js",
     "balance": "node balance.js",
