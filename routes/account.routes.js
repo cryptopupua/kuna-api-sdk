@@ -15,7 +15,7 @@ router.get(
                 rawbalance.forEach(function(currentCurrency){
                   let currentAmount = currentCurrency[currentCurrency.length-1];
                   if (currentAmount > 0) {
-                    balance.push(`Currency code:${currentCurrency[1]} ammount:${currentAmount}`);
+                    balance.push( { code: currentCurrency[1],  amount: currentAmount} );
                   }
                 });
               } 
