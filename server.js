@@ -2,7 +2,7 @@ const express = require('express')
 const config = require('config')
 
 const app = express()
-app.use(fn = '/api/account', require('./routes/account.routes'))
+app.use(fn = '/api/kuna', require('./routes/kuna.routes'))
 
 const PORT = config.get('port') || 5000
 
