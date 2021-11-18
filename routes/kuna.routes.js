@@ -19,7 +19,7 @@ router.get(
                   }
                 });
               } 
-            res.status(201).json({ balance })
+            res.status(200).json({ balance })
 
         } catch (e) {
             res.status(500).json({ message: `Error:` + e.message })
@@ -44,10 +44,11 @@ router.get(
         })
       }
 
-      const code = req.query['code']
-      const result = code;
-
-     res.status(201).json({message:`Info about code:${result}`})
+      const inkunacode = req.query['code']
+      kuna.public.validateKunaCode(inkunacode)
+      var kunacodepattern1=inkunacode.slice(0, 5);
+      const result = await kuna.public.checkKunaCode(kunacodepattern1)
+      res.status(200).json({ kunacodeinfo: result})
     } catch (e) {
       res.status(500).json({ message: `Error when getting kunacode info${e.message}`})
     } 
