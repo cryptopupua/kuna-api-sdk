@@ -1,6 +1,6 @@
 const keys = {
-  publicKey: 'EZKJ91vHFfBt0FvNciqR3xQKZi5UjBOEtnNMAiio',
-  secretKey: 'xZvaoxZhww9ExwXkGUG6l1VkdYAL1mo1aVjFqI2Y',
+    publicKey: '',
+    secretKey: '',
   };
 
   module.exports = keys;
