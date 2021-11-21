@@ -20,11 +20,11 @@ router.get(
                 });
               } 
             res.status(200).json({ balance })
-
         } catch (e) {
-            res.status(500).json({ message: `Error:` + e.message })
+            res.status(500).json({ message: `Error catched: ${e.message}`})
         }
-    })
+      }
+)
 
 ///api/kuna/kunacode
 router.get(
@@ -52,8 +52,21 @@ router.get(
       const result = await kuna.public.checkKunaCode(kunacodepattern1)
       res.status(200).json({ kunacodeinfo: result})
     } catch (e) {
-      res.status(500).json({ message: `Error when getting kunacode info: ${e.message}`})
+      res.status(500).json({ message: `Error catched: ${e.message}`})
     } 
+  }
+)
+
+///api/kuna/activatekunacode
+router.post(
+  'activatekunacode',
+  [],
+  async (req,res) => {
+    try {
+      res.status(201).json({message: `Kunacode activated`})
+    } catch (e) {
+      res.status(500).json( {message: `Error catched: ${e.message}`} )
+    }
   }
 )
 
