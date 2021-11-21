@@ -57,13 +57,31 @@ router.get(
   }
 )
 
-///api/kuna/activatekunacode
+///api/kuna/kunacodeactivate
 router.post(
-  'activatekunacode',
-  [],
+  '/kunacodeactivate',
+  [    
+    check('code','Minimal kunacode lenght 5')
+    .isLength(min = 5)
+  ],
   async (req,res) => {
     try {
-      res.status(201).json({message: `Kunacode activated`})
+      const errors = validationResult(req)
+
+      if (!errors.isEmpty()) {
+        return res.status(400).json({
+          errors: errors.array(),
+          message: "Incorrect activation data"
+        }
+        )
+      }
+    
+      const {code} = req.body 
+      kuna.public.validateKunaCode(code)
+      
+      const result = await kuna.private.activateCode(code)
+
+      res.status(201).json({message: `Kunacode activated: ${result}`})
     } catch (e) {
       res.status(500).json( {message: `Error catched: ${e.message}`} )
     }
