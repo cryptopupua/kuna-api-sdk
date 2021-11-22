@@ -1,5 +1,5 @@
 const { Router } = require('express')
-const { check, validationResult } = require('express-validator')
+const { check, body, validationResult } = require('express-validator')
 const router = Router()
 const keys = require('../keys');
 const kuna = require('../v3')(keys); 
@@ -59,13 +59,11 @@ router.get(
 
 ///api/kuna/kunacodeactivate
 router.post(
-  '/kunacodeactivate',
-  [    
-    check('code','Minimal kunacode lenght 5')
-    .isLength(min = 5)
-  ],
+  '/kunacodeactivate',    
+  check('code','Minimal kunacode lenght 5').isLength({min: 5}),
   async (req,res) => {
     try {
+      console.log(`Body${req.body}`)
       const errors = validationResult(req)
 
       if (!errors.isEmpty()) {

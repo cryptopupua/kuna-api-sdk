@@ -2,6 +2,8 @@ const express = require('express')
 const config = require('config')
 
 const app = express()
+
+app.use(express.json({extended: true}))
 app.use(fn = '/api/kuna', require('./routes/kuna.routes'))
 
 const PORT = config.get('port') || 5000
