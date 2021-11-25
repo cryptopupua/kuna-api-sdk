@@ -20,7 +20,7 @@ function step2(data,inkunacode) {
     const isactivate = prompt('Activate code? (y/N)');
     if (isactivate === 'y') {
       try {
-        kuna.private.activateCode(inkunacode).then((data)=> console.log(data));
+        kuna.private.activateKunaCode(inkunacode).then((data)=> console.log(data));
       } catch (error) {
           return error.message;
       }

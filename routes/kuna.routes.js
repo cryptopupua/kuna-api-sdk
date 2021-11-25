@@ -1,5 +1,5 @@
 const { Router } = require('express')
-const { check, body, validationResult } = require('express-validator')
+const { check, validationResult } = require('express-validator')
 const router = Router()
 const keys = require('../keys');
 const kuna = require('../v3')(keys); 
@@ -23,7 +23,7 @@ router.get(
         } catch (e) {
             res.status(500).json({ message: `Error catched: ${e.message}`})
         }
-      }
+  }
 )
 
 ///api/kuna/kunacode
@@ -57,14 +57,42 @@ router.get(
   }
 )
 
+///api/kuna/createkunacode
+router.post(
+  '/createkunacode',    
+  [ ],
+  async (req, res) => {
+    try {
+      const errors = validationResult(req);
+
+      if (!errors.isEmpty()) {
+        return res.status(400).json({
+          errors: errors.array(),
+          message: "Incorrect data for KunaCode creation"
+        }
+        )
+      };
+     
+      kunacodeinfo = {recipient: '', amount: req.body.amount, currency: req.body.currency, non_refundable_before: null, comment: null, private_comment: null};
+      const result = await kuna.private.createKunacode(kunacodeinfo);
+
+      res.status(201).json({kunacodeinfo: result});
+    } catch (e) {
+      res.status(500).json( {message: `Error catched: ${e.message}`} )
+    }    
+  }  
+)
+
 ///api/kuna/kunacodeactivate
 router.post(
   '/kunacodeactivate',    
-  check('code','Minimal kunacode lenght 5').isLength({min: 5}),
+  [
+    check('code','Minimal kunacode lenght 5')
+    .isLength(min = 5)
+  ],
   async (req,res) => {
     try {
-      console.log(`Body${req.body}`)
-      const errors = validationResult(req)
+      const errors = validationResult(req);
 
       if (!errors.isEmpty()) {
         return res.status(400).json({
@@ -74,14 +102,16 @@ router.post(
         )
       }
     
-      const {code} = req.body 
-      kuna.public.validateKunaCode(code)
-      
-      const result = await kuna.private.activateCode(code)
-
-      res.status(201).json({message: `Kunacode activated: ${result}`})
+      const {code} = req.body;
+      kuna.public.validateKunaCode(code);
+      var kunacodepattern1=code.slice(0, 5);
+      var result = await kuna.public.checkKunaCode(kunacodepattern1);
+      if (result.redeemed_at === null) {
+        result = await kuna.private.activateKunaCode(code);
+      };
+      res.status(201).json({ kunacodeinfo: result } );
     } catch (e) {
-      res.status(500).json( {message: `Error catched: ${e.message}`} )
+      res.status(500).json( {message: `Error catched: ${e.message}`} );
     }
   }
 )
