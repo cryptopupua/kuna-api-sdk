@@ -10,6 +10,7 @@ router.get(
     '/getbalance',
     async(req, res) => {
         try {
+            let me = await kuna.private.accountInfo();
             let rawbalance  = await kuna.private.accountBalance();
             let balance = [];
             if (rawbalance instanceof Array) {
@@ -18,9 +19,8 @@ router.get(
                   if (currentAmount > 0) {
                     balance.push( { code: currentCurrency[1],  amount: currentAmount} );
                   }
-                });
-              } 
-            res.status(200).json({ balance });
+            })};
+            res.status(200).json({ balance , me});
         } catch (e) {
             res.status(500).json({ message: `Error catched: ${e.message}`});
         }
@@ -31,7 +31,7 @@ router.get(
 router.get(
     '/kunacode',
     [
-      check('code','Minimal kunacode lenght 5').isLength({min: 5})
+      check('code','Minimal kunacode lenght 5').isLength( min = 5 )
     ],
     async (req,res) => {
       try {
@@ -81,7 +81,7 @@ router.post(
       res.status(500).json( {message: `Error catched: ${e.message}`} )
     }    
   }  
-)
+);
 
 ///api/kuna/kunacodeactivate
 router.post(
