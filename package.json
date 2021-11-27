@@ -21,7 +21,7 @@
   "_resolved": "https://registry.npmjs.org/kuna-api-sdk/-/kuna-api-sdk-1.0.2.tgz",
   "_shasum": "4e026aba94c1520bd15662505501d06154ba81bc",
   "_spec": "kuna-api-sdk",
-  "_where": "D:\\CODING\\PROJECTS\\Kuna-api-sdk",
+  "_where": "C:\\sources\\Kuna-api-sdk",
   "author": "",
   "bundleDependencies": [],
   "dependencies": {
@@ -40,12 +40,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/cryptopupua/kuna-api-sdk.git"
+    "url": "https://github.com/BtcRelax/kuna-api-sdk.git"
   },
   "bugs": {
-    "url": "https://github.com/cryptopupua/kuna-api-sdk/issues"
+    "url": "https://github.com/BtcRelax/kuna-api-sdk/issues"
   },
-  "homepage": "https://github.com/cryptopupua/kuna-api-sdk",
+  "homepage": "https://github.com/BtcRelax/kuna-api-sdk",
   "deprecated": false,
   "description": "Kuna api sdk - V3, V2",
   "keywords": [],
@@ -60,9 +60,9 @@
     "create": "node createkunacode.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "version": "2.1.6",
+  "version": "3.0.1",
   "jshintConfig": {
-    "esversion": 6
+    "esversion": 9
   },
   "devDependencies": {
     "concurrently": "^6.3.0",
