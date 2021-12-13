@@ -12,7 +12,7 @@ async function start() {
     try { 
         app.listen(PORT, () => console.log(`App has been started on port ${PORT}`));
     } catch (e) {
-        console.log('Server error', e.message);
+        console.log(`Server error: ${e.message}`);
         process.exit(code=1);
     }
 }

@@ -5,12 +5,24 @@ const router = Router();
 const keys = require('../keys');
 const kuna = require('../v3')(keys); 
 
+///api/kuna/me
+router.get(
+  '/me',
+  async(req, res) => {
+      try {
+          let me = await kuna.private.accountInfo();
+          res.status(200).json({ me });
+      } catch (e) {
+          res.status(500).json({ message: `Error catched: ${e.message}`});
+      }
+    }  
+);
+
 ///api/kuna/getbalance
 router.get(
     '/getbalance',
     async(req, res) => {
         try {
-            let me = await kuna.private.accountInfo();
             let rawbalance  = await kuna.private.accountBalance();
             let balance = [];
             if (rawbalance instanceof Array) {
@@ -20,7 +32,7 @@ router.get(
                     balance.push( { code: currentCurrency[1],  amount: currentAmount} );
                   }
             })};
-            res.status(200).json({ balance , me});
+            res.status(200).json({ balance});
         } catch (e) {
             res.status(500).json({ message: `Error catched: ${e.message}`});
         }
