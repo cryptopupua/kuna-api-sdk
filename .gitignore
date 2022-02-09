@@ -5,6 +5,9 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
+# Configs
+config/default.config
+
 # Runtime data
 pids
 *.pid
@@ -59,8 +62,5 @@ typings/
 
 # next.js build output
 .next
-
-# keys.js secret info
-keys.js
-keys.js
-keys.js
+config/default.json
+config/production.json

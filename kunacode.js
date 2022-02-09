@@ -1,7 +1,11 @@
+const keys = require('./keys');
+const kuna = require('./v3')(keys); 
+const prompt = require('prompt-sync')();
+
 function checkCode(inkunacode, autoaccept) {
   try {
     if (autoaccept === true) {
-      kuna.private.activateCode(inkunacode).then((data)=> console.log(data));
+      kuna.private.activateKunaCode(inkunacode).then((data)=> console.log(data));
     } else {
       kuna.public.validateKunaCode(inkunacode);
       var kunacodepattern1=inkunacode.slice(0, 5);
@@ -20,17 +24,13 @@ function step2(data,inkunacode) {
     const isactivate = prompt('Activate code? (y/N)');
     if (isactivate === 'y') {
       try {
-        kuna.private.activateCode(inkunacode).then((data)=> console.log(data));
+        kuna.private.activateKunaCode(inkunacode).then((data)=> console.log(data));
       } catch (error) {
           return error.message;
       }
     }   
   }
 }
-
-const keys = require('./keys');
-const kuna = require('./v3')(keys); 
-const prompt = require('prompt-sync')();
 
 if (process.argv.length < 3)
 {

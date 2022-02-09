@@ -50,11 +50,23 @@ KunaPrivate.prototype.createOrder = function (order) {
   return this.authedRequest(url, method, order)
 }
 
+/**
+ * Создать kunacode
+ * @param {Object} kunacodeparams {recipient, amount, currency, non_refundable_before, comment, private_comment}
+ * @description https://docs.kuna.io/docs/%D1%81%D0%BE%D0%B7%D0%B4%D0%B0%D1%82%D1%8C-kuna-code
+ */
+ KunaPrivate.prototype.createKunacode = function (kunacodeparams) {
+  const url = 'auth/kuna_codes' 
+  const method = 'post'
+  return this.authedRequest(url, method, kunacodeparams)
+}
+
+
 /** Activate kuna code if possible
- * @param {*} kunaCode 
+ * @param {String} kunaCode { code }
  * @returns 
  */
-KunaPrivate.prototype.activateCode = function (kunaCode) {
+KunaPrivate.prototype.activateKunaCode = function (kunaCode) {
   const url = 'auth/kuna_codes/redeem' 
   const method = 'put'
   const body = { code: kunaCode }

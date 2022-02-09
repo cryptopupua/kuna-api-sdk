@@ -1,0 +1,118 @@
+{
+    "info": {
+        "_postman_id": "9bfe910d-89ea-49df-88a5-eea190a30b0b",
+        "name": "1",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+            "name": "Informational endpoint: Returns details about some public info",
+            "id": "1a30f2c2-00eb-4e6a-9277-21724bcb5bfa",
+            "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                    "raw": "{{baseUrl}}/Info?action=<string>",
+                    "host": [
+                        "{{baseUrl}}"
+                    ],
+                    "path": [
+                        "Info"
+                    ],
+                    "query": [
+                        {
+                            "description": "(Required) what kind of info",
+                            "key": "action",
+                            "value": "<string>"
+                        }
+                    ]
+                }
+            },
+            "response": [
+                {
+                    "id": "56610d85-2c03-4693-9608-3bb1895bfe8c",
+                    "name": "Unexpected error",
+                    "originalRequest": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{baseUrl}}/Info?action=<string>",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "Info"
+                            ],
+                            "query": [
+                                {
+                                    "key": "action",
+                                    "value": "<string>"
+                                }
+                            ]
+                        }
+                    },
+                    "status": "Internal Server Error",
+                    "code": 500,
+                    "_postman_previewlanguage": "json",
+                    "header": [
+                        {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                        }
+                    ],
+                    "cookie": [],
+                    "responseTime": null,
+                    "body": "{\n \"code\": \"<integer>\",\n \"message\": \"<string>\"\n}"
+                },
+                {
+                    "id": "ddd0efb8-e4d9-4e66-a7cb-e99b90366fad",
+                    "name": "Sample response: Details about a user by ID",
+                    "originalRequest": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{baseUrl}}/Info?action=<string>",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "Info"
+                            ],
+                            "query": [
+                                {
+                                    "key": "action",
+                                    "value": "<string>"
+                                }
+                            ]
+                        }
+                    },
+                    "status": "OK",
+                    "code": 200,
+                    "_postman_previewlanguage": "json",
+                    "header": [
+                        {
+                            "key": "x-next",
+                            "value": "<string>",
+                            "description": "A link to the next page of responses"
+                        },
+                        {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                        }
+                    ],
+                    "cookie": [],
+                    "responseTime": null,
+                    "body": "\"schema type not provided\""
+                }
+            ]
+        }
+    ],
+    "variable": [
+        {
+            "id": "baseUrl",
+            "key": "baseUrl",
+            "value": "http://localhost:3000",
+            "type": "string"
+        }
+    ]
+}
