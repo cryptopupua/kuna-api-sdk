@@ -11,7 +11,7 @@ function KunaPublic () {
 
 /**
  * Забрать время Юникс
- * @description https://kuna.io/api/v3/timestamp
+ * @description https://api.kuna.io/v3/timestamp
  */
 KunaPublic.prototype.getUnixTime = function(){
   return this.request('timestamp').then((data) => data.timestamp_miliseconds)

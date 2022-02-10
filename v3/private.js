@@ -40,6 +40,19 @@ KunaPrivate.prototype.accountBalance = function () {
 }
 
 /**
+ * Вывод средств
+ * @param {Object} withdrawalparams {withdraw_type, amount, withdrawall, address}
+ * @description https://docs.kuna.io/docs/withdrawal-funds-through-default-payments-gateway
+ */
+ KunaPrivate.prototype.withdrawal = function (withdrawalparams) {
+  const url = 'auth/withdraw' 
+  const method = 'post'
+  return this.authedRequest(url, method, withdrawalparams)
+}
+
+
+
+/**
  * Создать ордер
  * @param {Object} order {symbol, type [limit, market, market_by_quote], amount, price}
  * @description https://docs.kuna.io/docs/%D1%81%D0%BE%D0%B7%D0%B4%D0%B0%D1%82%D1%8C-%D0%BE%D1%80%D0%B4%D0%B5%D1%80-1
