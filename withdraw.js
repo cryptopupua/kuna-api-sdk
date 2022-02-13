@@ -4,8 +4,8 @@ const prompt = require('prompt-sync')();
 
 function withdrawal(cardnumber, howmuch) {
   try {
-    request = { withdraw_type : 'uah', amount : howmuch, withdrawall : true, address : cardnumber };
-    kuna.private.withdrawal(request).then((data)=> console.log(data));
+    withdrawrequest = { withdraw_type: 'uah', amount: howmuch, gateway: 'default', withdrawall: 0, withdraw_to : cardnumber };
+    kuna.private.withdrawal(withdrawrequest).then((data)=> console.log(data));
   } catch (error) {
     return error.message;
   } 

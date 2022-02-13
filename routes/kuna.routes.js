@@ -95,6 +95,32 @@ router.post(
   }  
 );
 
+///api/kuna/withdraw
+router.post(
+  '/withdraw',    
+  [ ],
+  async (req, res) => {
+    try {
+      const errors = validationResult(req);
+
+      if (!errors.isEmpty()) {
+        return res.status(400).json({
+          errors: errors.array(),
+          message: "Incorrect data for withdraw creation"
+        }
+        )
+      };
+     
+      withdrawrequest = { withdraw_type: req.body.currency , amount: req.body.amount, gateway: 'default', withdrawall: 0, withdraw_to : req.body.cardnumber };
+      const result = await kuna.private.withdrawal(withdrawrequest);
+
+      res.status(201).json({result});
+    } catch (e) {
+      res.status(500).json( {message: `Error catched: ${e.message}`} )
+    }    
+  }  
+);
+
 ///api/kuna/kunacodeactivate
 router.post(
   '/kunacodeactivate',    

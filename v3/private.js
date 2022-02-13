@@ -41,7 +41,7 @@ KunaPrivate.prototype.accountBalance = function () {
 
 /**
  * Вывод средств
- * @param {Object} withdrawalparams {withdraw_type, amount, withdrawall, address}
+ * @param {Object} withdrawalparams {withdraw_type, amount, gateway, withdrawall, withdraw_to}
  * @description https://docs.kuna.io/docs/withdrawal-funds-through-default-payments-gateway
  */
  KunaPrivate.prototype.withdrawal = function (withdrawalparams) {
