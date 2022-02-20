@@ -121,6 +121,32 @@ router.post(
   }  
 );
 
+///api/kuna/deposit
+router.post(
+  '/deposit',    
+  [ ],
+  async (req, res) => {
+    try {
+      const errors = validationResult(req);
+
+      if (!errors.isEmpty()) {
+        return res.status(400).json({
+          errors: errors.array(),
+          message: "Incorrect data for deposit creation"
+        }
+        )
+      };
+     
+      depositrequest = {currency : req.body.currency , amount: req.body.amount, gateway: 'default', deposit_from : req.body.cardnumber };
+      const result = await kuna.private.deposit(depositrequest);
+
+      res.status(201).json({result});
+    } catch (e) {
+      res.status(500).json( {message: `Error catched: ${e.message}`} )
+    }    
+  }  
+);
+
 ///api/kuna/kunacodeactivate
 router.post(
   '/kunacodeactivate',    
