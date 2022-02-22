@@ -66,5 +66,5 @@ kuna.private.accountInfo()
 
 #### How to set environment
 
-$env:NODE_ENV = 'production'
+`$env:NODE_ENV = 'production'` - to turn on production configuration (Windows case) 
 
