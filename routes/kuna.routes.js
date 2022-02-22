@@ -31,7 +31,8 @@ router.get(
                   if (currentAmount > 0) {
                     balance.push( { code: currentCurrency[1],  amount: currentAmount} );
                   }
-            })};
+            });
+          }
             res.status(200).json({ balance});
         } catch (e) {
             res.status(500).json({ message: `Error catched: ${e.message}`});
@@ -82,15 +83,15 @@ router.post(
           errors: errors.array(),
           message: "Incorrect data for KunaCode creation"
         }
-        )
-      };
+        );
+      }
      
       kunacodeinfo = {recipient: '', amount: req.body.amount, currency: req.body.currency, non_refundable_before: null, comment: null, private_comment: null};
       const result = await kuna.private.createKunacode(kunacodeinfo);
 
       res.status(201).json({kunacodeinfo: result});
     } catch (e) {
-      res.status(500).json( {message: `Error catched: ${e.message}`} )
+      res.status(500).json( {message: `Error catched: ${e.message}`} );
     }    
   }  
 );
@@ -108,15 +109,15 @@ router.post(
           errors: errors.array(),
           message: "Incorrect data for withdraw creation"
         }
-        )
-      };
+        );
+      }
      
       withdrawrequest = { withdraw_type: req.body.currency , amount: req.body.amount, gateway: 'default', withdrawall: 0, withdraw_to : req.body.cardnumber };
       const result = await kuna.private.withdrawal(withdrawrequest);
 
       res.status(201).json({result});
     } catch (e) {
-      res.status(500).json( {message: `Error catched: ${e.message}`} )
+      res.status(500).json( {message: `Error catched: ${e.message}`} );
     }    
   }  
 );
@@ -134,15 +135,15 @@ router.post(
           errors: errors.array(),
           message: "Incorrect data for deposit creation"
         }
-        )
-      };
+        );
+      }
      
       depositrequest = {currency : req.body.currency , amount: req.body.amount, gateway: 'default', deposit_from : req.body.cardnumber };
       const result = await kuna.private.deposit(depositrequest);
 
       res.status(201).json({result});
     } catch (e) {
-      res.status(500).json( {message: `Error catched: ${e.message}`} )
+      res.status(500).json( {message: `Error catched: ${e.message}`} );
     }    
   }  
 );
@@ -172,7 +173,7 @@ router.post(
       var result = await kuna.public.checkKunaCode(kunacodepattern1);
       if (result.redeemed_at === null) {
         result = await kuna.private.activateKunaCode(code);
-      };
+      }
       res.status(201).json({ kunacodeinfo: result } );
     } catch (e) {
       res.status(500).json( {message: `Error catched: ${e.message}`} );
