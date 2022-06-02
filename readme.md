@@ -63,3 +63,8 @@ kuna.private.accountInfo()
 * `.cancelAllOrders(market)` - Отменить все ордера 
 * `.authedRequest()` -  Сделать запрос с авторизационными заголовками и подписью
 * `.getSignature(url_api, nonce, body)` - Создать подпись
+
+#### How to set environment
+
+`$env:NODE_ENV = 'production'` - to turn on production configuration (Windows case) 
+

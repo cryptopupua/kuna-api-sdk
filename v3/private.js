@@ -39,6 +39,32 @@ KunaPrivate.prototype.accountBalance = function () {
   return this.authedRequest(url, method)
 }
 
+
+
+/**
+ * Вывод средств
+ * @param {Object} withdrawalparams {withdraw_type, amount, gateway, withdrawall, withdraw_to}
+ * @description https://docs.kuna.io/docs/withdrawal-funds-through-default-payments-gateway
+ */
+ KunaPrivate.prototype.withdrawal = function (withdrawalparams) {
+  const url = 'auth/withdraw' 
+  const method = 'post'
+  return this.authedRequest(url, method, withdrawalparams)
+}
+
+/**
+ * Fiat debt 
+ * @param {Object} depositparams {currency, amount, payment_service, deposit_from}
+ * @description https://docs.kuna.io/docs/%D0%BF%D0%BE%D0%BF%D0%BE%D0%BB%D0%BD%D0%B5%D0%BD%D0%B8%D0%B5-%D1%84%D0%B8%D0%B0%D1%82%D0%BE%D0%BC-%D1%81-%D0%B8%D1%81%D0%BF%D0%BE%D0%BB%D1%8C%D0%B7%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5%D0%BC-%D1%81%D1%82%D0%B0%D0%BD%D0%B4%D0%B0%D1%80%D1%82%D0%BD%D0%BE%D0%B3%D0%BE-%D0%BF%D0%BB%D0%B0%D1%82%D0%B5%D0%B6%D0%BD%D0%BE%D0%B3%D0%BE-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0
+ */
+ KunaPrivate.prototype.deposit = function (depositparams) {
+  const url = 'auth/deposit' 
+  const method = 'post'
+  return this.authedRequest(url, method, depositparams)
+}
+
+
+
 /**
  * Создать ордер
  * @param {Object} order {symbol, type [limit, market, market_by_quote], amount, price}
